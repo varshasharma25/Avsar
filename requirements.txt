@@ -1,4 +1,5 @@
 flask
+gunicorn
 google-genai>=2.25.0
 python-dotenv
 pypdf>=6.0.0
