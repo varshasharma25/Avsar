@@ -1,0 +1,34 @@
+<!-- Reusable Streamlined Footer Component -->
+<footer class="avsar-footer py-4" role="contentinfo">
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+            <!-- Brand & Tagline -->
+            <div class="d-flex align-items-center gap-2">
+                <span class="avsar-brand-symbol">
+                    <i class="bi bi-compass-fill" aria-hidden="true"></i>
+                </span>
+                <span class="fw-bold text-charcoal">Avsar</span>
+                <span class="avsar-badge-devanagari">अवसर</span>
+                <span class="text-muted small ms-2 d-none d-sm-inline">Plain-language opportunity navigator</span>
+            </div>
+
+            <!-- Essential Links -->
+            <ul class="list-inline mb-0 small">
+                <li class="list-inline-item"><a href="{{ url_for('opportunities_page') }}" class="text-decoration-none text-muted">Opportunities</a></li>
+                <li class="list-inline-item text-muted">•</li>
+                <li class="list-inline-item"><a href="{{ url_for('analyze_page') }}" class="text-decoration-none text-muted">Analyze</a></li>
+                <li class="list-inline-item text-muted">•</li>
+                <li class="list-inline-item"><a href="{{ url_for('about_page') }}" class="text-decoration-none text-muted">About</a></li>
+                <li class="list-inline-item text-muted">•</li>
+                <li class="list-inline-item"><a href="{{ url_for('about_page') }}#contact" class="text-decoration-none text-muted">Contact</a></li>
+                <li class="list-inline-item text-muted">•</li>
+                <li class="list-inline-item"><a href="{{ url_for('about_page') }}#disclaimer" class="text-decoration-none text-muted">Disclaimer</a></li>
+            </ul>
+
+            <!-- Copyright & Privacy note -->
+            <div class="text-muted small">
+                <span>© 2026 Avsar (अवसर) — Privacy First.</span>
+            </div>
+        </div>
+    </div>
+</footer>

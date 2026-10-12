@@ -1,0 +1,25 @@
+/*
+ * Avsar — About Page Stylesheet (Editorial Theme)
+ */
+
+.about-wrapper {
+  background-color: var(--avsar-bg);
+}
+
+.about-header-banner {
+  background: radial-gradient(ellipse 90% 60% at 50% 0%, rgba(134, 239, 172, 0.3) 0%, rgba(255, 255, 255, 0.8) 60%), #ffffff;
+  border: 1px solid var(--avsar-border);
+  border-radius: var(--avsar-radius-lg);
+  padding: 3rem 2rem;
+}
+
+.about-methodology-card {
+  border-radius: var(--avsar-radius-lg);
+}
+
+.about-stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--avsar-charcoal);
+  letter-spacing: -0.03em;
+}

@@ -1,0 +1,40 @@
+<!-- Reusable Safety Warning Component -->
+{# Macro to render evidence-based safety warning item #}
+{% macro render_safety_warning(warning, is_hindi=false) %}
+<div class="safety-warning-card p-3 rounded-3 border border-danger-subtle bg-danger-subtle text-dark mb-3">
+    <div class="d-flex align-items-center gap-2 mb-2">
+        <span class="badge bg-danger text-white">
+            <i class="bi bi-shield-exclamation me-1" aria-hidden="true"></i>
+            {{ warning.category if warning.category is defined else ('सावधानी चेतावनी' if is_hindi else 'Safety Alert') }}
+        </span>
+    </div>
+
+    {# Quoted suspicious excerpt from the notice #}
+    {% if warning.evidence is defined and warning.evidence %}
+        <div class="p-2 rounded bg-white border-start border-3 border-danger my-2">
+            <div class="text-danger small fw-semibold mb-1">
+                {{ 'नोटिस में संदिग्ध उद्धरण (Quoted excerpt):' if is_hindi else 'Quoted excerpt from notice:' }}
+            </div>
+            <blockquote class="mb-0 fst-italic small text-dark">
+                “{{ warning.evidence }}”
+            </blockquote>
+        </div>
+    {% endif %}
+
+    {# Explanation #}
+    <div class="small text-dark mb-2">
+        {{ warning.explanation if warning.explanation is defined else warning }}
+    </div>
+
+    {# Recommended next step / safe verification #}
+    {% if warning.next_step is defined and warning.next_step %}
+        <div class="small p-2 rounded bg-white border d-flex align-items-start gap-2">
+            <i class="bi bi-check-circle-fill text-success mt-1" aria-hidden="true"></i>
+            <div>
+                <strong>{{ 'सुरक्षित सत्यापन कदम:' if is_hindi else 'Recommended Verification:' }}</strong>
+                <span>{{ warning.next_step }}</span>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endmacro %}

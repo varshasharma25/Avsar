@@ -1,0 +1,223 @@
+/*
+ * Avsar — UI Components Stylesheet (Lime & Sage Editorial Design)
+ * Floating Cards, Badges, Trust Labels, Evidence Blocks, and Interactive Checklist Items.
+ */
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+
+.avsar-card {
+  background-color: var(--avsar-surface);
+  border: 1px solid var(--avsar-border);
+  border-radius: var(--avsar-radius-lg);
+  box-shadow: var(--avsar-shadow-sm);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.avsar-card:hover {
+  border-color: #cbd5e1;
+}
+
+.avsar-card-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--avsar-border-subtle);
+  background-color: var(--avsar-surface-card-header);
+}
+
+.avsar-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--avsar-charcoal);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  letter-spacing: -0.02em;
+}
+
+.avsar-card-body {
+  padding: 1.5rem;
+}
+
+/* Category Feature Card */
+.category-feature-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  border-radius: var(--avsar-radius-lg);
+}
+
+.category-feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--avsar-shadow-md);
+  border-color: var(--avsar-sage-border);
+}
+
+.category-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--avsar-radius-md);
+  background-color: var(--avsar-sage-tint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--avsar-sage-border);
+  color: var(--avsar-accent);
+}
+
+/* Step Badges */
+.step-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: var(--avsar-charcoal);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.15);
+}
+
+.step-mini-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--avsar-sage-tint);
+  color: var(--avsar-accent);
+  border: 1px solid var(--avsar-sage-border);
+  font-weight: 700;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Eligibility Status Badges & Trust Badges
+   ========================================================================== */
+
+.eligibility-status-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--avsar-radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.status-meets {
+  background-color: var(--avsar-success-bg);
+  color: var(--avsar-success);
+  border: 1px solid var(--avsar-success-border);
+}
+
+.status-does-not-meet {
+  background-color: var(--avsar-danger-bg);
+  color: var(--avsar-danger);
+  border: 1px solid var(--avsar-danger-border);
+}
+
+.status-cannot-tell {
+  background-color: var(--avsar-warning-bg);
+  color: var(--avsar-warning);
+  border: 1px solid var(--avsar-warning-border);
+}
+
+.trust-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.22rem 0.6rem;
+  border-radius: var(--avsar-radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.trust-from-notice {
+  background-color: var(--avsar-sage-tint);
+  color: var(--avsar-accent);
+  border: 1px solid var(--avsar-sage-border);
+}
+
+.trust-inferred {
+  background-color: var(--avsar-warning-bg);
+  color: var(--avsar-warning);
+  border: 1px solid var(--avsar-warning-border);
+}
+
+.trust-unverified {
+  background-color: var(--avsar-danger-bg);
+  color: var(--avsar-danger);
+  border: 1px solid var(--avsar-danger-border);
+}
+
+/* ==========================================================================
+   Evidence Quoted Block & Disclaimer Banner
+   ========================================================================== */
+
+.evidence-quote-box {
+  background-color: #f8faf9;
+  border-left: 3px solid var(--avsar-accent);
+  border-radius: 0 var(--avsar-radius-sm) var(--avsar-radius-sm) 0;
+  padding: 0.65rem 0.95rem;
+  word-break: break-word;
+}
+
+.evidence-quote-box blockquote {
+  font-style: italic;
+  font-size: 0.86rem;
+  color: var(--avsar-charcoal);
+  margin: 0;
+}
+
+.avsar-disclaimer-banner {
+  background-color: #f8faf9;
+  border: 1px solid var(--avsar-border);
+  border-left: 4px solid var(--avsar-accent);
+  border-radius: var(--avsar-radius-md);
+  padding: 1rem 1.3rem;
+  font-size: 0.86rem;
+  color: var(--avsar-text-main);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Action Plan Checklist
+   ========================================================================== */
+
+.action-checklist-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid var(--avsar-border);
+  border-radius: var(--avsar-radius-md);
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  word-break: break-word;
+}
+
+.action-checklist-item:hover {
+  background-color: var(--avsar-surface-subtle);
+  border-color: #cbd5e1;
+}
+
+.action-checklist-item input[type="checkbox"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.15rem;
+  accent-color: var(--avsar-accent);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.action-checklist-item.completed span {
+  text-decoration: line-through;
+  color: var(--avsar-text-muted);
+}

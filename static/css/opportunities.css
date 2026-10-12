@@ -1,0 +1,48 @@
+/*
+ * Avsar — Opportunities Discovery Stylesheet (Editorial Theme)
+ */
+
+.opportunities-wrapper {
+  background-color: var(--avsar-bg);
+}
+
+.opportunities-header-banner {
+  background: radial-gradient(ellipse 90% 60% at 50% 0%, rgba(134, 239, 172, 0.3) 0%, rgba(255, 255, 255, 0.8) 60%), #ffffff;
+  border: 1px solid var(--avsar-border);
+  border-radius: var(--avsar-radius-lg);
+  padding: 3rem 2rem;
+}
+
+.category-filter-nav .nav-link {
+  font-weight: 600;
+  color: var(--avsar-text-muted);
+  border: 1px solid var(--avsar-border);
+  background-color: #ffffff;
+  border-radius: var(--avsar-radius-pill);
+  padding: 0.5rem 1.25rem !important;
+  margin: 0.25rem;
+  transition: all 0.15s ease;
+}
+
+.category-filter-nav .nav-link:hover {
+  border-color: #cbd5e1;
+  color: var(--avsar-charcoal);
+  background-color: var(--avsar-surface-subtle);
+}
+
+.category-filter-nav .nav-link.active {
+  background-color: var(--avsar-charcoal) !important;
+  color: #ffffff !important;
+  border-color: var(--avsar-charcoal) !important;
+}
+
+.opportunity-guide-card {
+  border-radius: var(--avsar-radius-lg);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.opportunity-guide-card:hover {
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+  box-shadow: var(--avsar-shadow-md);
+}

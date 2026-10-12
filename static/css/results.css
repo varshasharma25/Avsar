@@ -1,0 +1,39 @@
+/*
+ * Avsar — Results Page Stylesheet
+ */
+
+.results-page-wrapper {
+  background-color: var(--avsar-bg);
+}
+
+.avsar-empty-icon {
+  font-size: 3rem;
+  color: var(--avsar-text-light);
+}
+
+/* Print Styles */
+@media print {
+  .no-print,
+  .avsar-navbar,
+  .avsar-footer,
+  .skip-link {
+    display: none !important;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-size: 12pt;
+  }
+
+  .avsar-card {
+    box-shadow: none !important;
+    border: 1px solid #cccccc !important;
+    page-break-inside: avoid;
+    margin-bottom: 1rem !important;
+  }
+
+  .results-page-wrapper {
+    padding: 0 !important;
+  }
+}

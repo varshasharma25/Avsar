@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard — Avsar (अवसर){% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-wrapper py-4 py-md-5">
+    <div class="container">
+
+        <!-- Dashboard Welcome Hero Banner -->
+        <div class="dashboard-hero-banner mb-5 text-center text-lg-start">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-8">
+                    <span class="avsar-hero-badge mb-3">
+                        <i class="bi bi-grid-fill" aria-hidden="true"></i> Opportunity Workspace
+                    </span>
+                    <h1 class="h2 fw-bold text-charcoal mb-2">
+                        Find your next opportunity
+                    </h1>
+                    <p class="text-muted lead fs-6 mb-4 max-w-720">
+                        Avsar helps you understand scholarships, public schemes, internships, jobs, and training announcements. Paste any circular to get an immediate, evidence-backed breakdown.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                        <a href="{{ url_for('analyze_page') }}" class="btn btn-avsar-primary px-4">
+                            <i class="bi bi-file-earmark-plus me-1" aria-hidden="true"></i> Analyze a Notice Now
+                        </a>
+                        <a href="{{ url_for('opportunities_page') }}" class="btn btn-avsar-outline px-4">
+                            <i class="bi bi-compass me-1" aria-hidden="true"></i> Explore Categories
+                        </a>
+                        {% if has_active_results %}
+                        <a href="{{ url_for('results_page') }}" class="btn btn-avsar-dark px-4">
+                            <i class="bi bi-eye me-1" aria-hidden="true"></i> View Current Results
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-lg-4 text-center d-none d-lg-block">
+                    <div class="p-4 bg-white rounded-4 border shadow-sm text-start">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <div class="step-mini-badge">✓</div>
+                            <span class="fw-bold text-charcoal small">Direct Verification</span>
+                        </div>
+                        <p class="text-muted small mb-0">
+                            Every eligibility condition is cross-referenced with exact verbatim sentences from the circular.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Shortcuts Section -->
+        <div class="mb-5">
+            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                <div>
+                    <h2 class="h4 fw-bold text-charcoal mb-0">Opportunity Category Shortcuts</h2>
+                    <p class="text-muted small mb-0">Launch discovery or analyze a notice within a specific category.</p>
+                </div>
+                <a href="{{ url_for('opportunities_page') }}" class="btn btn-sm btn-avsar-outline">
+                    View All Categories <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                </a>
+            </div>
+
+            <div class="row g-3">
+                <!-- 1. Scholarships -->
+                <div class="col-md-6 col-lg">
+                    <div class="avsar-card h-100 p-3 dashboard-category-card">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <div class="category-icon-box">
+                                <i class="bi bi-mortarboard fs-5" aria-hidden="true"></i>
+                            </div>
+                            <span class="badge bg-light text-muted border small">Education</span>
+                        </div>
+                        <h3 class="h6 fw-bold text-charcoal mb-1">Scholarships</h3>
+                        <p class="text-muted small mb-3">Merit-cum-means, state endowments, and fee waivers.</p>
+                        <a href="{{ url_for('opportunities_page', category='scholarships') }}" class="btn btn-sm btn-avsar-outline w-100">
+                            Explore <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. Government Schemes -->
+                <div class="col-md-6 col-lg">
+                    <div class="avsar-card h-100 p-3 dashboard-category-card">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <div class="category-icon-box">
+                                <i class="bi bi-building fs-5" aria-hidden="true"></i>
+                            </div>
+                            <span class="badge bg-light text-muted border small">Welfare</span>
+                        </div>
+                        <h3 class="h6 fw-bold text-charcoal mb-1">Government Schemes</h3>
+                        <p class="text-muted small mb-3">Public subsidies, grants, and citizen welfare orders.</p>
+                        <a href="{{ url_for('opportunities_page', category='government-schemes') }}" class="btn btn-sm btn-avsar-outline w-100">
+                            Explore <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 3. Internships -->
+                <div class="col-md-6 col-lg">
+                    <div class="avsar-card h-100 p-3 dashboard-category-card">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <div class="category-icon-box">
+                                <i class="bi bi-laptop fs-5" aria-hidden="true"></i>
+                            </div>
+                            <span class="badge bg-light text-muted border small">Experience</span>
+                        </div>
+                        <h3 class="h6 fw-bold text-charcoal mb-1">Internships</h3>
+                        <p class="text-muted small mb-3">Department internships, research cohorts, and stipends.</p>
+                        <a href="{{ url_for('opportunities_page', category='internships') }}" class="btn btn-sm btn-avsar-outline w-100">
+                            Explore <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 4. Jobs -->
+                <div class="col-md-6 col-lg">
+                    <div class="avsar-card h-100 p-3 dashboard-category-card">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <div class="category-icon-box">
+                                <i class="bi bi-briefcase fs-5" aria-hidden="true"></i>
+                            </div>
+                            <span class="badge bg-light text-muted border small">Career</span>
+                        </div>
+                        <h3 class="h6 fw-bold text-charcoal mb-1">Job Openings</h3>
+                        <p class="text-muted small mb-3">Public recruitments, board exams, and notifications.</p>
+                        <a href="{{ url_for('opportunities_page', category='jobs') }}" class="btn btn-sm btn-avsar-outline w-100">
+                            Explore <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 5. Skill Development -->
+                <div class="col-md-6 col-lg">
+                    <div class="avsar-card h-100 p-3 dashboard-category-card">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <div class="category-icon-box">
+                                <i class="bi bi-tools fs-5" aria-hidden="true"></i>
+                            </div>
+                            <span class="badge bg-light text-muted border small">Skills</span>
+                        </div>
+                        <h3 class="h6 fw-bold text-charcoal mb-1">Skill Development</h3>
+                        <p class="text-muted small mb-3">Vocational workshops, MSME bootcamps, certificates.</p>
+                        <a href="{{ url_for('opportunities_page', category='skill-development') }}" class="btn btn-sm btn-avsar-outline w-100">
+                            Explore <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- How to Use Avsar & Safety Tips -->
+        <div class="row g-4">
+            <!-- How to Use -->
+            <div class="col-lg-6">
+                <div class="avsar-card h-100 p-4">
+                    <h2 class="h5 fw-bold text-charcoal mb-3">
+                        <i class="bi bi-lightbulb text-success me-1" aria-hidden="true"></i>
+                        How to Use Avsar
+                    </h2>
+                    <div class="d-flex flex-column gap-3">
+                        <div class="dashboard-step-item">
+                            <div class="step-mini-badge">1</div>
+                            <div>
+                                <h3 class="h6 fw-bold text-charcoal mb-1">Obtain Official Circular Text</h3>
+                                <p class="text-muted small mb-0">Copy text from official announcement PDFs, gazettes, or departmental notification portals.</p>
+                            </div>
+                        </div>
+                        <div class="dashboard-step-item">
+                            <div class="step-mini-badge">2</div>
+                            <div>
+                                <h3 class="h6 fw-bold text-charcoal mb-1">Paste into the Analyzer</h3>
+                                <p class="text-muted small mb-0">Open the <a href="{{ url_for('analyze_page') }}" class="text-success fw-semibold">Analyze Notice</a> workspace, select your category, and optionally add your profile.</p>
+                            </div>
+                        </div>
+                        <div class="dashboard-step-item">
+                            <div class="step-mini-badge">3</div>
+                            <div>
+                                <h3 class="h6 fw-bold text-charcoal mb-1">Review Grounded Eligibility</h3>
+                                <p class="text-muted small mb-0">Inspect evidence quotes, document checklists, and deadline alerts directly on your results page.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Safety Tips -->
+            <div class="col-lg-6">
+                <div class="avsar-card h-100 p-4 border-warning-subtle">
+                    <h2 class="h5 fw-bold text-charcoal mb-3">
+                        <i class="bi bi-shield-check text-warning me-1" aria-hidden="true"></i>
+                        Safety Tips for Opportunity Seekers
+                    </h2>
+                    <ul class="list-unstyled d-flex flex-column gap-2 small text-muted mb-0">
+                        <li class="d-flex align-items-start gap-2">
+                            <i class="bi bi-exclamation-circle text-warning mt-1" aria-hidden="true"></i>
+                            <span><strong>No Upfront Processing Fees:</strong> Legitimate government schemes never require fees transferred to personal UPI IDs or bank accounts.</span>
+                        </li>
+                        <li class="d-flex align-items-start gap-2">
+                            <i class="bi bi-exclamation-circle text-warning mt-1" aria-hidden="true"></i>
+                            <span><strong>Official Indian Domains:</strong> Genuine government portals end in <code>.gov.in</code> or <code>.nic.in</code>. Beware of unauthorized WhatsApp circulars.</span>
+                        </li>
+                        <li class="d-flex align-items-start gap-2">
+                            <i class="bi bi-exclamation-circle text-warning mt-1" aria-hidden="true"></i>
+                            <span><strong>Always Confirm Official Deadlines:</strong> When circulars convey artificial urgency or lack stated closing dates, always cross-check the official portal.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+<!-- Reusable Minimal Navbar Component (Clean Editorial Style) -->
+<nav class="navbar avsar-navbar sticky-top navbar-expand-lg" aria-label="Main Navigation">
+    <div class="container">
+        <!-- Brand Wordmark -->
+        <a class="avsar-brand" href="{{ url_for('landing') }}" aria-label="Avsar Home">
+            <span class="avsar-brand-symbol">
+                <i class="bi bi-compass-fill" aria-hidden="true"></i>
+            </span>
+            <span>Avsar</span>
+            <span class="avsar-badge-devanagari">अवसर</span>
+        </a>
+
+        <!-- Mobile Toggler -->
+        <button
+            class="navbar-toggler border-0 shadow-none"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#avsarNavbarNav"
+            aria-controls="avsarNavbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navigation Links -->
+        <div class="collapse navbar-collapse" id="avsarNavbarNav">
+            <ul class="navbar-nav mx-auto align-items-lg-center gap-1 gap-lg-2 my-2 my-lg-0 list-unstyled mb-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('landing') }}#how-it-works">
+                        How It Works
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if active_page == 'opportunities' %}active{% endif %}" href="{{ url_for('opportunities_page') }}">
+                        Opportunities
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if active_page == 'about' %}active{% endif %}" href="{{ url_for('about_page') }}">
+                        About
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if active_page == 'analyze' %}active{% endif %}" href="{{ url_for('analyze_page') }}">
+                        Analyze
+                    </a>
+                </li>
+                {% if has_active_results %}
+                <li class="nav-item">
+                    <a class="nav-link {% if active_page == 'results' %}active{% endif %}" href="{{ url_for('results_page') }}">
+                        Results
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+
+            <!-- Right CTAs -->
+            <div class="d-flex align-items-center gap-2 mt-2 mt-lg-0">
+                <!-- Language Indicator -->
+                <div class="btn-group me-1" role="group" aria-label="Language Indicator">
+                    <span class="badge bg-white text-muted border small d-inline-flex align-items-center gap-1 px-2 py-1">
+                        <i class="bi bi-translate text-success" aria-hidden="true"></i>
+                        <span>EN / हिंदी</span>
+                    </span>
+                </div>
+
+                <!-- Primary "Get Started" Pill CTA -->
+                <a href="{{ url_for('home_dashboard') }}" class="btn btn-sm btn-avsar-primary px-3">
+                    <span>Get Started</span>
+                    <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,339 @@
+{% extends 'base.html' %}
+
+{% block title %}Avsar (अवसर) — Your next opportunity starts with clarity.{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+{% endblock %}
+
+{% block content %}
+<!-- ==========================================================================
+     A & B. Eye-Catching Hero Section (Lime/Sage Editorial Canvas)
+     ========================================================================== -->
+<header class="landing-hero text-center position-relative">
+    <div class="container py-4 py-lg-5">
+        <!-- Top Pill Badge -->
+        <div class="mb-3">
+            <span class="avsar-hero-badge">
+                <i class="bi bi-shield-check" aria-hidden="true"></i>
+                <span>Plain-Language Opportunity Decoder</span>
+            </span>
+        </div>
+
+        <!-- Headline & Subtitle matching Spendvest style -->
+        <h1 class="landing-hero-title">
+            Your next opportunity<br>starts with clarity.
+        </h1>
+        <div class="visually-hidden">Big opportunities. Clear next steps.</div>
+
+        <p class="landing-hero-subtitle">
+            Turn complicated scholarship, government scheme, internship, and job notices into simple explanations, personalized eligibility checks, and clear next steps.
+        </p>
+
+        <!-- Primary & Secondary CTAs -->
+        <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
+            <a href="{{ url_for('analyze_page') }}" class="btn btn-avsar-primary landing-cta-primary">
+                <i class="bi bi-file-earmark-text me-1" aria-hidden="true"></i>
+                <span>Analyze an Opportunity</span>
+            </a>
+            <a href="{{ url_for('opportunities_page') }}" class="btn btn-avsar-outline landing-cta-secondary">
+                <i class="bi bi-compass me-1" aria-hidden="true"></i>
+                <span>Explore Opportunities</span>
+            </a>
+        </div>
+
+        <!-- Trust Note Pill -->
+        <div class="d-flex justify-content-center mb-4">
+            <div class="alert alert-light border rounded-pill py-1 px-3 small text-muted d-inline-flex align-items-center gap-2 shadow-sm" style="max-width: 680px;" role="note">
+                <i class="bi bi-info-circle-fill text-success" aria-hidden="true"></i>
+                <span>Avsar decodes notices for plain-language clarity. Always cross-check dates and criteria with official departments.</span>
+            </div>
+        </div>
+
+        <!-- Visual Demonstration: Complex Notice -> Structured Clarity -->
+        <div class="row justify-content-center mt-3 mb-2">
+            <div class="col-xl-10">
+                <div class="p-3 p-md-4 rounded-4 bg-white border shadow-sm text-start">
+                    <div class="d-flex align-items-center justify-content-between pb-3 mb-3 border-bottom flex-wrap gap-2">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-sage-tint text-success border border-success-subtle fw-semibold">Visual Workflow</span>
+                            <span class="fw-bold text-charcoal small">How Complex Notices Turn Into Actionable Clarity</span>
+                        </div>
+                        <span class="badge bg-light text-muted border small"><i class="bi bi-shield-lock-fill text-success me-1"></i> Privacy Protected</span>
+                    </div>
+
+                    <div class="row g-3 align-items-stretch">
+                        <!-- Left: Raw Notice Circular -->
+                        <div class="col-md-5">
+                            <div class="h-100 p-3 rounded-3 bg-surface-subtle border d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="badge bg-secondary-subtle text-secondary small fw-semibold">
+                                        <i class="bi bi-file-earmark-text me-1"></i> Official Circular
+                                    </span>
+                                    <span class="badge bg-danger-subtle text-danger small">Complex &amp; Jargon-Heavy</span>
+                                </div>
+                                <div class="font-monospace text-muted small p-2 bg-white rounded border flex-grow-1" style="font-size: 0.75rem; line-height: 1.45;">
+                                    <strong>MINISTRY ORDER NO. 42/2026:</strong> Applications invited under sub-clause (iv) of section 3 for eligible domiciles. The competent revenue authority certifies income below ₹3.5L. Submissions close on 30.11.2026...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Center: Transition Indicator -->
+                        <div class="col-md-2 d-flex align-items-center justify-content-center my-2 my-md-0">
+                            <div class="d-flex flex-column align-items-center text-success">
+                                <i class="bi bi-arrow-right-circle-fill fs-2 d-none d-md-inline" aria-hidden="true"></i>
+                                <i class="bi bi-arrow-down-circle-fill fs-2 d-md-none" aria-hidden="true"></i>
+                                <span class="small fw-bold mt-1 text-center" style="font-size: 0.72rem;">Gemini Decodes</span>
+                            </div>
+                        </div>
+
+                        <!-- Right: Decoded Output Breakdown -->
+                        <div class="col-md-5">
+                            <div class="h-100 p-3 rounded-3 bg-surface-subtle border d-flex flex-column gap-2">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="badge bg-success-subtle text-success small fw-semibold">
+                                        <i class="bi bi-check2-circle me-1"></i> Structured Breakdown
+                                    </span>
+                                    <span class="badge bg-success text-white small">Actionable</span>
+                                </div>
+                                <div class="p-2 bg-white rounded border small d-flex align-items-center justify-content-between" style="font-size: 0.8rem;">
+                                    <span class="text-charcoal fw-bold"><i class="bi bi-card-text text-success me-1"></i> Plain Summary</span>
+                                    <span class="text-muted small">₹12,000/yr Grant</span>
+                                </div>
+                                <div class="p-2 bg-white rounded border small d-flex align-items-center justify-content-between" style="font-size: 0.8rem;">
+                                    <span class="text-charcoal fw-bold"><i class="bi bi-check-circle-fill text-success me-1"></i> Eligibility Evidence</span>
+                                    <span class="badge bg-sage-tint text-success border border-success-subtle" style="font-size: 0.7rem;">Matches Notice</span>
+                                </div>
+                                <div class="p-2 bg-white rounded border small d-flex align-items-center justify-content-between" style="font-size: 0.8rem;">
+                                    <span class="text-charcoal fw-bold"><i class="bi bi-calendar-event text-danger me-1"></i> Deadline</span>
+                                    <span class="fw-bold text-charcoal">30 Nov 2026</span>
+                                </div>
+                                <div class="p-2 bg-white rounded border small d-flex align-items-center justify-content-between" style="font-size: 0.8rem;">
+                                    <span class="text-charcoal fw-bold"><i class="bi bi-folder-check text-success me-1"></i> Required Documents</span>
+                                    <span class="text-muted small">Marksheet, Income Cert</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+<!-- ==========================================================================
+     C. How It Works (3 Clear Steps)
+     ========================================================================== -->
+<section id="how-it-works" class="py-5 bg-white border-bottom" aria-labelledby="how-heading">
+    <div class="container py-3">
+        <div class="text-center mb-5">
+            <span class="badge bg-sage-tint text-success border border-success-subtle small mb-2 fw-semibold">Simple Workflow</span>
+            <h2 id="how-heading" class="h3 fw-bold text-charcoal">
+                How Avsar Works
+            </h2>
+            <p class="text-muted small max-w-600 mx-auto">
+                No complex navigation or confusing jargon. Just three clear steps from notification to application.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Step 1 -->
+            <div class="col-md-4">
+                <div class="avsar-card h-100 p-4 text-center">
+                    <div class="step-badge mx-auto mb-3">1</div>
+                    <h3 class="h6 fw-bold text-charcoal mb-2">Paste Official Notice</h3>
+                    <p class="text-muted small mb-0">
+                        Paste or provide any official circular text, government order, or scholarship notification into the analyzer.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="col-md-4">
+                <div class="avsar-card h-100 p-4 text-center">
+                    <div class="step-badge mx-auto mb-3">2</div>
+                    <h3 class="h6 fw-bold text-charcoal mb-2">Understand in Simple Language</h3>
+                    <p class="text-muted small mb-0">
+                        Read plain-language explanations in English or natural Hindi (हिंदी), clarifying benefits, terms, and deadlines.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="col-md-4">
+                <div class="avsar-card h-100 p-4 text-center">
+                    <div class="step-badge mx-auto mb-3">3</div>
+                    <h3 class="h6 fw-bold text-charcoal mb-2">Review Evidence &amp; Checklist</h3>
+                    <p class="text-muted small mb-0">
+                        Inspect verbatim source quotes for eligibility, verified deadlines, required documents, and actionable next steps.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     D. What Avsar Helps With (4 Compact Supported Categories)
+     ========================================================================== -->
+<section id="categories" class="py-5 bg-surface-subtle border-bottom" aria-labelledby="cat-heading">
+    <div class="container py-3">
+        <div class="text-center mb-5">
+            <span class="badge bg-sage-tint text-success border border-success-subtle small mb-2 fw-semibold">Focus Areas</span>
+            <h2 id="cat-heading" class="h3 fw-bold text-charcoal">
+                What Avsar Helps With
+            </h2>
+            <p class="text-muted small max-w-600 mx-auto">
+                Analyze public circulars across four core Supported Categories. Paste your notice into any category to decode it.
+            </p>
+        </div>
+
+        <div class="row g-3">
+            <!-- Category 1: Scholarships -->
+            <div class="col-sm-6 col-lg-3">
+                <div class="avsar-card h-100 p-3 category-feature-card">
+                    <div class="category-icon-box mb-3">
+                        <i class="bi bi-mortarboard fs-5" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="h6 fw-bold text-charcoal mb-1">Scholarships</h3>
+                    <p class="text-muted small mb-3">Merit-cum-means, state grants, and tuition fee waivers.</p>
+                    <a href="{{ url_for('opportunities_page', category='scholarship') }}" class="btn btn-sm btn-avsar-outline w-100">
+                        Explore Scholarships <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Category 2: Government Schemes -->
+            <div class="col-sm-6 col-lg-3">
+                <div class="avsar-card h-100 p-3 category-feature-card">
+                    <div class="category-icon-box mb-3">
+                        <i class="bi bi-building fs-5" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="h6 fw-bold text-charcoal mb-1">Government Schemes</h3>
+                    <p class="text-muted small mb-3">Welfare subsidies, citizen benefits, and public orders.</p>
+                    <a href="{{ url_for('opportunities_page', category='government_scheme') }}" class="btn btn-sm btn-avsar-outline w-100">
+                        Explore Schemes <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Category 3: Internships -->
+            <div class="col-sm-6 col-lg-3">
+                <div class="avsar-card h-100 p-3 category-feature-card">
+                    <div class="category-icon-box mb-3">
+                        <i class="bi bi-laptop fs-5" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="h6 fw-bold text-charcoal mb-1">Internships</h3>
+                    <p class="text-muted small mb-3">Public sector internships, research cohorts, and fellowships.</p>
+                    <a href="{{ url_for('opportunities_page', category='internship') }}" class="btn btn-sm btn-avsar-outline w-100">
+                        Explore Internships <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Category 4: Jobs and Skill Training -->
+            <div class="col-sm-6 col-lg-3">
+                <div class="avsar-card h-100 p-3 category-feature-card">
+                    <div class="category-icon-box mb-3">
+                        <i class="bi bi-briefcase fs-5" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="h6 fw-bold text-charcoal mb-1">Jobs &amp; Skill Training</h3>
+                    <p class="text-muted small mb-3">Recruitment circulars, apprenticeships, and vocational bootcamps.</p>
+                    <a href="{{ url_for('opportunities_page', category='job') }}" class="btn btn-sm btn-avsar-outline w-100">
+                        Explore Careers <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     E. Why Avsar Is Useful (Value Highlights)
+     ========================================================================== -->
+<section class="py-5 bg-white border-bottom" aria-labelledby="highlights-heading">
+    <div class="container py-3">
+        <div class="text-center mb-5">
+            <span class="badge bg-sage-tint text-success border border-success-subtle small mb-2 fw-semibold">Built For Trust</span>
+            <h2 id="highlights-heading" class="h3 fw-bold text-charcoal">
+                Why Avsar Is Useful
+            </h2>
+            <p class="text-muted small max-w-600 mx-auto">
+                Bridge the opportunity gap with reliable, verified plain-language breakdown.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <!-- 1. Simple Language & Bilingual -->
+            <div class="col-md-4">
+                <div class="avsar-card h-100 p-4">
+                    <div class="feature-pill-icon mb-3">
+                        <i class="bi bi-translate text-success fs-4" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="h6 fw-bold text-charcoal mb-2">English &amp; Hindi Support</h3>
+                    <p class="text-muted small mb-0">
+                        Translates dense bureaucratic circulars into straightforward, easy-to-understand explanations in either English or Hindi (हिंदी).
+                    </p>
+                </div>
+            </div>
+
+            <!-- 2. Evidence-Backed Eligibility -->
+            <div class="col-md-4">
+                <div class="avsar-card h-100 p-4">
+                    <div class="feature-pill-icon mb-3">
+                        <i class="bi bi-quote text-success fs-4" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="h6 fw-bold text-charcoal mb-2">Eligibility Checks with Evidence</h3>
+                    <p class="text-muted small mb-0">
+                        Every qualification condition cites exact verbatim excerpts from the notice. You always see the authentic source sentence.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 3. Transparency & Privacy First -->
+            <div class="col-md-4">
+                <div class="avsar-card h-100 p-4">
+                    <div class="feature-pill-icon mb-3">
+                        <i class="bi bi-shield-check text-success fs-4" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="h6 fw-bold text-charcoal mb-2">Privacy First &amp; Honest Uncertainty</h3>
+                    <p class="text-muted small mb-0">
+                        Zero database tracking. Unclear dates, missing fees, and unverified details are marked as unknown rather than invented.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     F. Clean Final CTA (No redundant footer clutter)
+     ========================================================================== -->
+<section class="py-5 bg-surface-subtle" aria-labelledby="cta-heading">
+    <div class="container py-3">
+        <div class="avsar-card p-5 text-center bg-white border shadow-sm">
+            <h2 id="cta-heading" class="h3 fw-bold text-charcoal mb-2">
+                Have an Opportunity Notice to Decode?
+            </h2>
+            <p class="text-muted small max-w-600 mx-auto mb-4">
+                Paste any scholarship circular, recruitment announcement, or welfare order to get a structured summary and action plan in seconds.
+            </p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a href="{{ url_for('analyze_page') }}" class="btn btn-avsar-primary px-4">
+                    <i class="bi bi-file-earmark-plus me-1" aria-hidden="true"></i>
+                    <span>Analyze an Opportunity Now</span>
+                </a>
+                <a href="{{ url_for('opportunities_page') }}" class="btn btn-avsar-outline px-4">
+                    <i class="bi bi-compass me-1" aria-hidden="true"></i>
+                    <span>Explore Opportunities</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block page_js %}
+<script src="{{ url_for('static', filename='js/landing.js') }}"></script>
+{% endblock %}

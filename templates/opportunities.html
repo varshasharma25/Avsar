@@ -1,0 +1,279 @@
+{% extends 'base.html' %}
+
+{% block title %}Opportunity Categories & Discovery — Avsar (अवसर){% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/opportunities.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="opportunities-wrapper py-4 py-md-5">
+    <div class="container">
+
+        <!-- Header Banner -->
+        <div class="opportunities-header-banner text-center mb-5">
+            <span class="avsar-hero-badge mb-3">
+                <i class="bi bi-compass-fill" aria-hidden="true"></i> Opportunity Discovery Guide
+            </span>
+            <h1 class="h2 fw-bold text-charcoal mb-2">
+                Explore Opportunity Categories
+            </h1>
+            <p class="text-muted lead fs-6 max-w-720 mx-auto mb-3">
+                Understand how different public circulars, scholarships, and career programs work. Avsar analyzes notices that you paste to decode official requirements and criteria.
+            </p>
+
+            <!-- Important Distinction Alert -->
+            <div class="alert alert-light border rounded-pill d-inline-flex align-items-center gap-2 py-2 px-3 small text-muted mx-auto shadow-sm" role="note">
+                <i class="bi bi-info-circle-fill text-success" aria-hidden="true"></i>
+                <span><strong>Notice Analysis Hub:</strong> Avsar evaluates official circulars you provide; it does not claim to host live job or scheme listings.</span>
+            </div>
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div class="d-flex justify-content-center flex-wrap category-filter-nav mb-5" role="tablist" aria-label="Category Filters">
+            <button
+                type="button"
+                class="nav-link {% if not selected_category or selected_category == 'all' %}active{% endif %}"
+                data-category="all"
+            >
+                All Categories
+            </button>
+            <button
+                type="button"
+                class="nav-link {% if selected_category == 'scholarship' %}active{% endif %}"
+                data-category="scholarship"
+            >
+                Scholarships (छात्रवृत्ति)
+            </button>
+            <button
+                type="button"
+                class="nav-link {% if selected_category == 'government_scheme' %}active{% endif %}"
+                data-category="government_scheme"
+            >
+                Government Schemes (सरकारी योजना)
+            </button>
+            <button
+                type="button"
+                class="nav-link {% if selected_category == 'internship' %}active{% endif %}"
+                data-category="internship"
+            >
+                Internships (इंटर्नशिप)
+            </button>
+            <button
+                type="button"
+                class="nav-link {% if selected_category == 'job' %}active{% endif %}"
+                data-category="job"
+            >
+                Job Openings (नौकरी)
+            </button>
+            <button
+                type="button"
+                class="nav-link {% if selected_category == 'training' %}active{% endif %}"
+                data-category="training"
+            >
+                Skill Development (प्रशिक्षण)
+            </button>
+        </div>
+
+        <!-- Opportunity Cards Grid -->
+        <div class="row g-4" id="opportunity-cards-grid">
+
+            <!-- 1. Scholarships Card -->
+            <div class="col-lg-6 opportunity-guide-item {% if selected_category and selected_category not in ['scholarship', 'all'] %}d-none{% endif %}" data-category="scholarship">
+                <div class="avsar-card h-100 p-4 opportunity-guide-card">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="category-icon-box">
+                            <i class="bi bi-mortarboard fs-4" aria-hidden="true"></i>
+                        </div>
+                        <span class="badge bg-sage-tint text-success border border-success-subtle small fw-semibold">Education & Grants</span>
+                    </div>
+
+                    <h2 class="h5 fw-bold text-charcoal mb-1">
+                        Scholarships
+                        <span class="text-muted small fw-normal">(छात्रवृत्ति एवं अनुदान)</span>
+                    </h2>
+                    <p class="text-muted small mb-3">
+                        Merit-cum-means awards, state fee waivers, central fellowships, and girls' education financial incentives.
+                    </p>
+
+                    <div class="p-3 rounded-3 bg-surface-subtle border mb-4">
+                        <h3 class="small fw-bold text-charcoal mb-2">What Avsar Extracts:</h3>
+                        <ul class="list-unstyled mb-0 d-flex flex-column gap-1 small text-muted">
+                            <li><i class="bi bi-check2 text-success me-1"></i> Class / Degree mark thresholds (e.g. 55% min)</li>
+                            <li><i class="bi bi-check2 text-success me-1"></i> Parental income caps (e.g. < ₹3.5 Lakhs/year)</li>
+                            <li><i class="bi bi-check2 text-success me-1"></i> Required certificates (Marksheet, Income, Domicile, Caste)</li>
+                            <li><i class="bi bi-check2 text-success me-1"></i> Application deadlines and National Scholarship Portal dates</li>
+                        </ul>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between mt-auto">
+                        <span class="text-muted small">Have a scholarship circular?</span>
+                        <a href="{{ url_for('analyze_page', category='scholarship') }}" class="btn btn-sm btn-avsar-primary px-3">
+                            <span>Analyze Scholarship Notice</span>
+                            <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Government Schemes Card -->
+            <div class="col-lg-6 opportunity-guide-item {% if selected_category and selected_category not in ['government_scheme', 'all'] %}d-none{% endif %}" data-category="government_scheme">
+                <div class="avsar-card h-100 p-4 opportunity-guide-card">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="category-icon-box">
+                            <i class="bi bi-building fs-4" aria-hidden="true"></i>
+                        </div>
+                        <span class="badge bg-sage-tint text-success border border-success-subtle small fw-semibold">Public Welfare</span>
+                    </div>
+
+                    <h2 class="h5 fw-bold text-charcoal mb-1">
+                        Government Schemes
+                        <span class="text-muted small fw-normal">(सरकारी जनकल्याण योजनाएं)</span>
+                    </h2>
+                    <p class="text-muted small mb-3">
+                        Direct benefit transfers (DBT), state youth allowances, agricultural tool subsidies, and subsidized housing programs.
+                    </p>
+
+                    <div class="p-3 rounded-3 bg-surface-subtle border mb-4">
+                        <h3 class="small fw-bold text-charcoal mb-2">What Avsar Extracts:</h3>
+                        <ul class="list-unstyled mb-0 d-flex flex-column gap-1 small text-muted">
+                            <li><i class="bi bi-check2 text-success me-1"></i> Domicile & age requirements</li>
+                            <li><i class="bi bi-check2 text-success me-1"></i> Specific benefit amounts and subsidy structures</li>
+                            <li><i class="bi bi-check2 text-success me-1"></i> Bank-Aadhaar linking and Jan Dhan account rules</li>
+                            <li><i class="bi bi-check2 text-success me-1"></i> Verification warnings against unofficial agent fees</li>
+                        </ul>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between mt-auto">
+                        <span class="text-muted small">Have a government scheme order?</span>
+                        <a href="{{ url_for('analyze_page', category='government_scheme') }}" class="btn btn-sm btn-avsar-primary px-3">
+                            <span>Analyze Scheme Notice</span>
+                            <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Internships Card -->
+            <div class="col-lg-6 opportunity-guide-item {% if selected_category and selected_category not in ['internship', 'all'] %}d-none{% endif %}" data-category="internship">
+                <div class="avsar-card h-100 p-4 opportunity-guide-card">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="category-icon-box">
+                            <i class="bi bi-laptop fs-4" aria-hidden="true"></i>
+                        </div>
+                        <span class="badge bg-sage-tint text-success border border-success-subtle small fw-semibold">Experience & Research</span>
+                    </div>
+
+                    <h2 class="h5 fw-bold text-charcoal mb-1">
+                        Internships
+                        <span class="text-muted small fw-normal">(इंटर्नशिप एवं अप्रेंटिसशिप)</span>
+                    </h2>
+                    <p class="text-muted small mb-3">
+                        Government ministry internships, research council student openings, public sector apprenticeships, and stipends.
+                    </p>
+
+                    <div class="p-3 rounded-3 bg-surface-subtle border mb-4">
+                        <h3 class="small fw-bold text-charcoal mb-2">What Avsar Extracts:</h3>
+                        <ul class="list-unstyled mb-0 d-flex flex-column gap-1 small text-muted">
+                            <li><i class="bi bi-check2 text-success me-1"></i> Degree discipline, semester, and minimum CGPA criteria</li>
+                            <li><i class="bi bi-check2 text-success me-1"></i> Monthly stipend figures and program duration</li>
+                            <li><i class="bi bi-check2 text-success me-1"></i> No-Objection Certificate (NOC) and college letter requirements</li>
+                            <li><i class="bi bi-check2 text-success me-1"></i> Selection mode (Merit shortlist vs Interview)</li>
+                        </ul>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between mt-auto">
+                        <span class="text-muted small">Have an internship notification?</span>
+                        <a href="{{ url_for('analyze_page', category='internship') }}" class="btn btn-sm btn-avsar-primary px-3">
+                            <span>Analyze Internship Notice</span>
+                            <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Job Openings Card -->
+            <div class="col-lg-6 opportunity-guide-item {% if selected_category and selected_category not in ['job', 'all'] %}d-none{% endif %}" data-category="job">
+                <div class="avsar-card h-100 p-4 opportunity-guide-card">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="category-icon-box">
+                            <i class="bi bi-briefcase fs-4" aria-hidden="true"></i>
+                        </div>
+                        <span class="badge bg-sage-tint text-success border border-success-subtle small fw-semibold">Public Employment</span>
+                    </div>
+
+                    <h2 class="h5 fw-bold text-charcoal mb-1">
+                        Job Openings
+                        <span class="text-muted small fw-normal">(सरकारी भर्ती एवं नौकरियां)</span>
+                    </h2>
+                    <p class="text-muted small mb-3">
+                        Public service commissions, staff selection boards, municipal recruitments, and technical staff notifications.
+                    </p>
+
+                    <div class="p-3 rounded-3 bg-surface-subtle border mb-4">
+                        <h3 class="small fw-bold text-charcoal mb-2">What Avsar Extracts:</h3>
+                        <ul class="list-unstyled mb-0 d-flex flex-column gap-1 small text-muted">
+                            <li><i class="bi bi-check2 text-success me-1"></i> Age relaxation rules for reserved categories</li>
+                            <li><i class="bi bi-check2 text-success me-1"></i> Educational qualifications and required experience</li>
+                            <li><i class="bi bi-check2 text-success me-1"></i> Registration dates, exam dates, and official fee details</li>
+                            <li><i class="bi bi-check2 text-success me-1"></i> Official portal URLs for hall ticket downloads</li>
+                        </ul>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between mt-auto">
+                        <span class="text-muted small">Have a recruitment notice?</span>
+                        <a href="{{ url_for('analyze_page', category='job') }}" class="btn btn-sm btn-avsar-primary px-3">
+                            <span>Analyze Job Notice</span>
+                            <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Skill Development Card -->
+            <div class="col-lg-6 opportunity-guide-item {% if selected_category and selected_category not in ['training', 'all'] %}d-none{% endif %}" data-category="training">
+                <div class="avsar-card h-100 p-4 opportunity-guide-card">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="category-icon-box">
+                            <i class="bi bi-tools fs-4" aria-hidden="true"></i>
+                        </div>
+                        <span class="badge bg-sage-tint text-success border border-success-subtle small fw-semibold">Skill Building</span>
+                    </div>
+
+                    <h2 class="h5 fw-bold text-charcoal mb-1">
+                        Skill Development & Training
+                        <span class="text-muted small fw-normal">(कौशल विकास व प्रशिक्षण)</span>
+                    </h2>
+                    <p class="text-muted small mb-3">
+                        National skill development cohorts (PMKVY), MSME technical toolroom courses, digital literacy, and free certifications.
+                    </p>
+
+                    <div class="p-3 rounded-3 bg-surface-subtle border mb-4">
+                        <h3 class="small fw-bold text-charcoal mb-2">What Avsar Extracts:</h3>
+                        <ul class="list-unstyled mb-0 d-flex flex-column gap-1 small text-muted">
+                            <li><i class="bi bi-check2 text-success me-1"></i> Minimum qualification (e.g. 8th, 10th, 12th pass)</li>
+                            <li><i class="bi bi-check2 text-success me-1"></i> Training center locations and batch schedules</li>
+                            <li><i class="bi bi-check2 text-success me-1"></i> Course duration and certification authority</li>
+                            <li><i class="bi bi-check2 text-success me-1"></i> Post-training placement assistance terms</li>
+                        </ul>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between mt-auto">
+                        <span class="text-muted small">Have a skill training circular?</span>
+                        <a href="{{ url_for('analyze_page', category='training') }}" class="btn btn-sm btn-avsar-primary px-3">
+                            <span>Analyze Training Notice</span>
+                            <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script src="{{ url_for('static', filename='js/opportunities.js') }}"></script>
+{% endblock %}

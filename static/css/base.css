@@ -1,0 +1,330 @@
+/*
+ * Avsar — Premium Design System & Base Stylesheet
+ * Inspired by modern editorial SaaS: Soft blurred lime/sage green gradients,
+ * dark charcoal typography, crisp white cards, pill buttons, and generous whitespace.
+ */
+
+:root {
+  /* Surfaces & Canvas */
+  --avsar-bg: #fdfefe;
+  --avsar-surface: #ffffff;
+  --avsar-surface-subtle: #f8faf9;
+  --avsar-surface-card-header: #ffffff;
+  --avsar-border: #e2e8f0;
+  --avsar-border-subtle: #edf2f7;
+  --avsar-border-focus: #22c55e;
+
+  /* Editorial Palette: Lime & Sage Accents */
+  --avsar-lime-bg: #86efac;          /* Vibrant soft lime button surface */
+  --avsar-lime-hover: #4ade80;       /* Lime hover */
+  --avsar-sage-tint: #ecfdf5;        /* Sage subtle highlight */
+  --avsar-sage-border: #bbf7d0;      /* Sage soft border */
+  --avsar-accent: #16a34a;           /* Deep emerald for icons & accents */
+
+  /* Charcoal / Near-Black Typography */
+  --avsar-charcoal: #0f172a;         /* High-contrast near-black for headings & dark buttons */
+  --avsar-charcoal-hover: #1e293b;   /* Hover state for dark buttons */
+  --avsar-text-main: #1e293b;        /* Primary body copy */
+  --avsar-text-muted: #64748b;       /* Muted secondary copy */
+  --avsar-text-light: #94a3b8;       /* Subtle tertiary text */
+
+  /* Status Colors (WCAG AA Compliant) */
+  --avsar-success: #15803d;
+  --avsar-success-bg: #f0fdf4;
+  --avsar-success-border: #bbf7d0;
+
+  --avsar-warning: #b45309;
+  --avsar-warning-bg: #fffbeb;
+  --avsar-warning-border: #fde68a;
+
+  --avsar-danger: #b91c1c;
+  --avsar-danger-bg: #fef2f2;
+  --avsar-danger-border: #fecaca;
+
+  /* Shadows */
+  --avsar-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04);
+  --avsar-shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.02);
+  --avsar-shadow-lg: 0 20px 35px -10px rgba(15, 23, 42, 0.07);
+
+  /* Corner Radii */
+  --avsar-radius-sm: 8px;
+  --avsar-radius-md: 14px;
+  --avsar-radius-lg: 20px;
+  --avsar-radius-pill: 9999px;
+}
+
+/* Base Reset & Typography */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Noto Sans', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--avsar-text-main);
+  background-color: var(--avsar-bg);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+/* Accessible Skip Link */
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 1rem;
+  background: var(--avsar-charcoal);
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  z-index: 1050;
+  border-radius: var(--avsar-radius-sm);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: top 0.15s ease-in-out;
+}
+
+.skip-link:focus {
+  top: 1rem;
+  outline: 3px solid var(--avsar-lime-hover);
+}
+
+/* ==========================================================================
+   Navigation Bar (Minimal, Floating Glass Style)
+   ========================================================================== */
+
+.avsar-navbar {
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--avsar-border-subtle);
+  padding: 0.85rem 0;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Defensive bullet immunity for navbar, footer, and utility lists */
+.navbar-nav,
+.navbar-nav > li,
+.navbar-nav .nav-item,
+ul.navbar-nav,
+ul.navbar-nav > li,
+.avsar-navbar ul,
+.avsar-navbar li,
+.list-inline,
+.list-inline-item,
+.avsar-footer ul,
+.avsar-footer li {
+  list-style: none !important;
+  list-style-type: none !important;
+}
+
+.avsar-brand {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--avsar-charcoal);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: -0.03em;
+}
+
+.avsar-brand:hover,
+.avsar-brand:focus-visible {
+  color: var(--avsar-charcoal);
+}
+
+.avsar-brand-symbol {
+  width: 28px;
+  height: 28px;
+  background-color: var(--avsar-charcoal);
+  color: #ffffff;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.avsar-badge-devanagari {
+  font-size: 0.78rem;
+  background-color: var(--avsar-sage-tint);
+  color: var(--avsar-accent);
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--avsar-radius-pill);
+  border: 1px solid var(--avsar-sage-border);
+}
+
+.nav-link {
+  font-weight: 600;
+  color: var(--avsar-text-muted);
+  font-size: 0.92rem;
+  padding: 0.5rem 0.85rem !important;
+  border-radius: var(--avsar-radius-pill);
+  transition: all 0.15s ease;
+}
+
+.nav-link:hover {
+  color: var(--avsar-charcoal);
+  background-color: rgba(15, 23, 42, 0.04);
+}
+
+.nav-link.active {
+  color: var(--avsar-charcoal) !important;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Buttons (Pill Shapes matching the reference)
+   ========================================================================== */
+
+/* Primary Pill Button (Vibrant Soft Lime) */
+.btn-avsar-primary {
+  background-color: var(--avsar-lime-bg);
+  border: 1px solid var(--avsar-lime-hover);
+  color: var(--avsar-charcoal);
+  font-weight: 700;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--avsar-radius-pill);
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.15);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+.btn-avsar-primary:hover,
+.btn-avsar-primary:focus {
+  background-color: var(--avsar-lime-hover);
+  color: var(--avsar-charcoal);
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Dark Pill Button (Charcoal with white text & arrow) */
+.btn-avsar-dark {
+  background-color: var(--avsar-charcoal);
+  border: 1px solid var(--avsar-charcoal);
+  color: #ffffff;
+  font-weight: 700;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--avsar-radius-pill);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+.btn-avsar-dark:hover,
+.btn-avsar-dark:focus {
+  background-color: var(--avsar-charcoal-hover);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.2);
+}
+
+/* Outline Pill Button */
+.btn-avsar-outline {
+  border: 1px solid var(--avsar-border);
+  color: var(--avsar-text-main);
+  background-color: #ffffff;
+  font-weight: 600;
+  padding: 0.6rem 1.3rem;
+  border-radius: var(--avsar-radius-pill);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  box-shadow: var(--avsar-shadow-sm);
+}
+
+.btn-avsar-outline:hover,
+.btn-avsar-outline:focus {
+  background-color: var(--avsar-surface-subtle);
+  border-color: #cbd5e1;
+  color: var(--avsar-charcoal);
+  transform: translateY(-1px);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--avsar-border-focus);
+  outline-offset: 2px;
+}
+
+/* Pill Badges */
+.avsar-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background-color: #ffffff;
+  color: var(--avsar-charcoal);
+  font-size: 0.84rem;
+  font-weight: 700;
+  padding: 0.38rem 1rem;
+  border-radius: var(--avsar-radius-pill);
+  border: 1px solid var(--avsar-border);
+  box-shadow: var(--avsar-shadow-sm);
+}
+
+.avsar-hero-badge i {
+  color: var(--avsar-accent);
+}
+
+/* Utilities */
+.text-charcoal {
+  color: var(--avsar-charcoal) !important;
+}
+
+.bg-surface-subtle {
+  background-color: var(--avsar-surface-subtle) !important;
+}
+
+.bg-sage-tint {
+  background-color: var(--avsar-sage-tint) !important;
+}
+
+.max-w-600 {
+  max-width: 600px;
+}
+
+.max-w-720 {
+  max-width: 720px;
+}
+
+/* ==========================================================================
+   Footer (Clean, Minimal, Trustworthy)
+   ========================================================================== */
+
+.avsar-footer {
+  background-color: #ffffff;
+  border-top: 1px solid var(--avsar-border-subtle);
+  padding: 3.5rem 0 2rem;
+  color: var(--avsar-text-muted);
+  font-size: 0.88rem;
+  margin-top: auto;
+}

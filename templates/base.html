@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="{{ session.get('language', 'en') }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Avsar (अवसर) — Opportunity, decoded.{% endblock %}</title>
+
+    <!-- Bootstrap 5.3 CSS (Local with CDN Fallback) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/bootstrap.min.css') }}">
+
+    <!-- Bootstrap Icons (Local) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.min.css') }}">
+
+    <!-- Google Fonts: Noto Sans (Latin) + Noto Sans Devanagari (Hindi) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Core Design System Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/design-system.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+
+    <!-- Page-Specific Styles -->
+    {% block page_css %}{% endblock %}
+
+    <!-- Global Responsive Overrides -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+</head>
+<body>
+    <!-- Accessible Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Top Navigation Bar -->
+    {% include 'components/navbar.html' %}
+
+    <!-- Flash Messages (if any) -->
+    {% include 'components/flash_messages.html' %}
+
+    <!-- Main Content Area -->
+    <main id="main-content" tabindex="-1">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Global Footer -->
+    {% include 'components/footer.html' %}
+
+    <!-- Bootstrap 5.3 JS Bundle (Local) -->
+    <script src="{{ url_for('static', filename='vendor/bootstrap/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Global Base JS -->
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+
+    <!-- Page-Specific JS -->
+    {% block page_js %}{% endblock %}
+</body>
+</html>

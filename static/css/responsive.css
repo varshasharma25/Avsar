@@ -1,0 +1,75 @@
+/*
+ * Avsar — Responsive Stylesheet
+ * Refinements across mobile (320px–430px), tablet, and desktop viewports.
+ */
+
+/* Small Mobile Screens (< 480px, including 320px - 430px) */
+@media (max-width: 480px) {
+  .landing-hero-title {
+    font-size: 1.85rem;
+    line-height: 1.25;
+  }
+
+  .landing-hero-subtitle {
+    font-size: 0.98rem;
+  }
+
+  .landing-cta-primary,
+  .landing-cta-secondary {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .hero-visual-card {
+    padding: 1rem;
+  }
+
+  .avsar-card-header,
+  .avsar-card-body {
+    padding: 1rem;
+  }
+
+  .notice-textarea {
+    min-height: 170px;
+  }
+
+  .btn-avsar-primary,
+  .btn-avsar-outline {
+    min-height: 48px;
+  }
+
+  .lang-btn-group .btn {
+    min-height: 48px;
+    font-size: 0.85rem;
+  }
+
+  .avsar-brand {
+    font-size: 1.2rem;
+  }
+
+  .eligibility-status-badge {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.55rem;
+  }
+}
+
+/* Tablet & Smaller Desktops (< 992px) */
+@media (max-width: 991.98px) {
+  .landing-hero {
+    padding: 2.25rem 0 1.75rem;
+  }
+
+  .avsar-card {
+    margin-bottom: 1.25rem;
+  }
+}
+
+/* Accessible Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

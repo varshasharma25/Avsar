@@ -1,0 +1,31 @@
+<!-- Reusable Opportunity Category Card Component -->
+{# Macro to render an opportunity category card #}
+{% macro render_category_card(key, title, hindi_title, icon, description, sample_tag) %}
+<div class="col-md-6 col-lg-4">
+    <div class="avsar-card h-100 category-feature-card">
+        <div class="avsar-card-body d-flex flex-column justify-content-between">
+            <div>
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <div class="category-icon-box">
+                        <i class="bi {{ icon }} text-success fs-4" aria-hidden="true"></i>
+                    </div>
+                    <span class="badge bg-sage-tint text-success border border-success-subtle small">{{ sample_tag }}</span>
+                </div>
+                <h4 class="h6 fw-bold text-charcoal mb-1">
+                    {{ title }}
+                    <span class="small fw-normal text-muted">({{ hindi_title }})</span>
+                </h4>
+                <p class="text-muted small mb-3">
+                    {{ description }}
+                </p>
+            </div>
+            <div>
+                <a href="{{ url_for('analyze_page', category=key) }}" class="btn btn-sm btn-avsar-outline w-100">
+                    <span>Analyze {{ title }}</span>
+                    <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}

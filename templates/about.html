@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+
+{% block title %}About Avsar — Opportunity, decoded.{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="about-wrapper py-4 py-md-5">
+    <div class="container">
+
+        <!-- About Header Banner -->
+        <div class="about-header-banner text-center mb-5">
+            <span class="avsar-hero-badge mb-3">
+                <i class="bi bi-info-circle-fill" aria-hidden="true"></i> Mission & Principles
+            </span>
+            <h1 class="h2 fw-bold text-charcoal mb-2">
+                Making Opportunities Understandable for Everyone
+            </h1>
+            <p class="text-muted lead fs-6 max-w-720 mx-auto mb-3">
+                Avsar was conceived to solve a widespread problem in public education and citizen services: valuable notices buried under complex bureaucratic language.
+            </p>
+        </div>
+
+        <!-- The Problem We Address -->
+        <section class="mb-5" aria-labelledby="problem-heading">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-6">
+                    <span class="badge bg-light text-success border small mb-2 fw-semibold">The Problem</span>
+                    <h2 id="problem-heading" class="h3 fw-bold text-charcoal mb-3">
+                        Why Do People Miss Legitimate Opportunities?
+                    </h2>
+                    <p class="text-muted small mb-3">
+                        Every year, hundreds of government schemes, higher education scholarships, and apprenticeship vacancies go unutilized. Students, fresh graduates, and families face real obstacles:
+                    </p>
+                    <ul class="list-unstyled d-flex flex-column gap-2 small text-muted">
+                        <li class="d-flex align-items-start gap-2">
+                            <i class="bi bi-x-circle text-danger mt-1" aria-hidden="true"></i>
+                            <span><strong>Formal Jargon:</strong> Circulars run 15–30 pages in dense administrative English, obscuring basic facts like who qualifies.</span>
+                        </li>
+                        <li class="d-flex align-items-start gap-2">
+                            <i class="bi bi-x-circle text-danger mt-1" aria-hidden="true"></i>
+                            <span><strong>Unclear Eligibility Rules:</strong> Complex criteria (parental income caps, domicile, marks criteria) leave applicants unsure whether they qualify.</span>
+                        </li>
+                        <li class="d-flex align-items-start gap-2">
+                            <i class="bi bi-x-circle text-danger mt-1" aria-hidden="true"></i>
+                            <span><strong>Missed Deadlines & Scams:</strong> Lack of clear document checklists causes rejected applications, while unverified social media circulars demand illegitimate fees.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="avsar-card p-4 bg-white border">
+                        <span class="badge bg-sage-tint text-success border border-success-subtle small mb-2 fw-semibold">Our Approach</span>
+                        <h3 class="h5 fw-bold text-charcoal mb-3">
+                            The Avsar Solution
+                        </h3>
+                        <p class="text-muted small mb-3">
+                            Avsar transforms raw circulars into actionable application blueprints:
+                        </p>
+                        <div class="d-flex flex-column gap-2 small">
+                            <div class="p-2 rounded bg-surface-subtle border d-flex align-items-center gap-2">
+                                <i class="bi bi-check-circle-fill text-success" aria-hidden="true"></i>
+                                <span class="fw-medium text-charcoal">Plain-Language Summaries in English & Hindi</span>
+                            </div>
+                            <div class="p-2 rounded bg-surface-subtle border d-flex align-items-center gap-2">
+                                <i class="bi bi-check-circle-fill text-success" aria-hidden="true"></i>
+                                <span class="fw-medium text-charcoal">Evidence-Based Eligibility matched with source quotes</span>
+                            </div>
+                            <div class="p-2 rounded bg-surface-subtle border d-flex align-items-center gap-2">
+                                <i class="bi bi-check-circle-fill text-success" aria-hidden="true"></i>
+                                <span class="fw-medium text-charcoal">Interactive Action Plan Checklist and document requirements</span>
+                            </div>
+                            <div class="p-2 rounded bg-surface-subtle border d-flex align-items-center gap-2">
+                                <i class="bi bi-check-circle-fill text-success" aria-hidden="true"></i>
+                                <span class="fw-medium text-charcoal">Scam & fee warnings with safe verification steps</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Methodology: Evidence-Based Citations -->
+        <section id="methodology" class="mb-5 py-4 border-top" aria-labelledby="method-heading">
+            <div class="text-center mb-4">
+                <span class="badge bg-light text-success border small mb-2 fw-semibold">Methodology</span>
+                <h2 id="method-heading" class="h3 fw-bold text-charcoal">
+                    How Evidence-Based Eligibility Works
+                </h2>
+                <p class="text-muted small max-w-600 mx-auto">
+                    We designed Avsar with strict anti-hallucination guardrails. Here is how our architecture works:
+                </p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="avsar-card h-100 p-4 text-center">
+                        <div class="step-badge mx-auto mb-3">1</div>
+                        <h3 class="h6 fw-bold text-charcoal mb-2">Verbatim Source Extraction</h3>
+                        <p class="text-muted small mb-0">
+                            Whenever Gemini identifies an eligibility condition, it must cite the exact sentence from the notice as verbatim evidence. We never translate the quote so its legal meaning remains intact.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="avsar-card h-100 p-4 text-center">
+                        <div class="step-badge mx-auto mb-3">2</div>
+                        <h3 class="h6 fw-bold text-charcoal mb-2">Profile Comparison</h3>
+                        <p class="text-muted small mb-0">
+                            If you provide optional profile details (such as Class 9, age 14, income), Avsar compares each criterion to assign standard status values: <code>matches</code>, <code>does_not_match</code>, or <code>unknown</code>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="avsar-card h-100 p-4 text-center">
+                        <div class="step-badge mx-auto mb-3">3</div>
+                        <h3 class="h6 fw-bold text-charcoal mb-2">Trust Labeling</h3>
+                        <p class="text-muted small mb-0">
+                            Every fact is explicitly labeled as <em>From notice</em>, <em>Inferred</em>, or <em>Unverified</em>. Missing information is flagged explicitly instead of guessed.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Limitations of AI & Official Verification -->
+        <section id="disclaimer" class="mb-5 py-4 border-top" aria-labelledby="disc-heading">
+            <div class="avsar-card p-4 p-md-5 bg-surface-subtle border-warning-subtle">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <i class="bi bi-shield-exclamation text-warning fs-3" aria-hidden="true"></i>
+                    <h2 id="disc-heading" class="h4 fw-bold text-charcoal mb-0">
+                        AI Limitations & Official Verification Notice
+                    </h2>
+                </div>
+                <p class="text-muted small mb-3">
+                    While Avsar uses state-of-the-art Google Gemini models to parse and simplify notices, it operates under clear ethical boundaries:
+                </p>
+                <div class="row g-3 text-muted small mb-4">
+                    <div class="col-md-6">
+                        <div class="p-3 bg-white rounded-3 border h-100">
+                            <h3 class="fw-bold text-charcoal small mb-1">Informational Guidance Only</h3>
+                            <p class="mb-0">Avsar does not make legal determinations or guarantee acceptance. Only the issuing authority can officially determine eligibility.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3 bg-white rounded-3 border h-100">
+                            <h3 class="fw-bold text-charcoal small mb-1">Notice Authenticity</h3>
+                            <p class="mb-0">Avsar decodes the text you supply. It cannot independently authenticate whether a third-party PDF is an authentic government order.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-charcoal fw-bold small mb-3">
+                    Always confirm dates, official gazette numbers, and application procedures on the official issuing portal (such as scholarships.gov.in, upsconline.nic.in, or state government portals).
+                </p>
+
+                <div class="d-flex gap-2">
+                    <a href="{{ url_for('analyze_page') }}" class="btn btn-sm btn-avsar-primary px-3">
+                        <i class="bi bi-file-earmark-plus me-1" aria-hidden="true"></i> Analyze a Notice
+                    </a>
+                    <a href="{{ url_for('home_dashboard') }}" class="btn btn-sm btn-avsar-outline px-3">
+                        <i class="bi bi-grid me-1" aria-hidden="true"></i> Open Workspace
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="mb-5 py-4 border-top" aria-labelledby="contact-heading">
+            <div class="avsar-card p-4 p-md-5 bg-white border">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-7">
+                        <span class="badge bg-sage-tint text-success border border-success-subtle small mb-2 fw-semibold">
+                            <i class="bi bi-envelope-fill me-1" aria-hidden="true"></i> Get in Touch
+                        </span>
+                        <h2 id="contact-heading" class="h3 fw-bold text-charcoal mb-2">
+                            Questions or Feedback?
+                        </h2>
+                        <p class="text-muted small mb-4">
+                            Have a question, suggestion, or feedback about Avsar? We'd love to hear from you.
+                        </p>
+                        <div class="p-3 rounded-3 bg-surface-subtle border mb-2">
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <div class="text-muted small fw-semibold">Contact Person</div>
+                                    <div class="text-charcoal fw-bold">Varsha Sharma</div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="text-muted small fw-semibold">Email Address</div>
+                                    <a href="mailto:varsharma2710@gmail.com" class="text-success fw-bold text-decoration-none text-break">
+                                        varsharma2710@gmail.com
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 text-lg-end">
+                        <a href="mailto:varsharma2710@gmail.com" class="btn btn-avsar-primary px-4 py-2 fs-6">
+                            <i class="bi bi-envelope-paper-fill me-2" aria-hidden="true"></i> Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+{% endblock %}

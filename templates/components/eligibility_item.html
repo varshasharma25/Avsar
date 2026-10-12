@@ -1,0 +1,68 @@
+<!-- Reusable Eligibility Item Component -->
+{# Macro to render an eligibility requirement item with evidence quote and status badge #}
+{% macro render_eligibility_item(item, is_hindi=false) %}
+<div class="eligibility-card-item p-3 rounded-3 border bg-white mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
+        <span class="fw-semibold text-charcoal">{{ item.criterion }}</span>
+        
+        {# Status Badge: Never color alone — always includes specific icon and accessible label #}
+        {% set status = (item.status | default('unknown') | lower) %}
+        {% if status in ['matches', 'meets'] %}
+            <span class="eligibility-status-badge status-meets">
+                <i class="bi bi-check-circle-fill me-1" aria-hidden="true"></i>
+                {{ 'पात्र / मेल खाता है' if is_hindi else 'Matches' }}
+            </span>
+        {% elif status in ['does_not_match', 'does_not_meet'] %}
+            <span class="eligibility-status-badge status-does-not-meet">
+                <i class="bi bi-x-circle-fill me-1" aria-hidden="true"></i>
+                {{ 'अपात्र / मेल नहीं खाता' if is_hindi else 'Does not match' }}
+            </span>
+        {% else %}
+            <span class="eligibility-status-badge status-cannot-tell">
+                <i class="bi bi-question-circle-fill me-1" aria-hidden="true"></i>
+                {{ 'अज्ञात / स्पष्ट नहीं' if is_hindi else 'Unknown / Verify' }}
+            </span>
+        {% endif %}
+    </div>
+
+    {# Exact verbatim source quote from the original notice #}
+    {% if item.evidence %}
+        <div class="evidence-quote-box mb-2">
+            <div class="text-muted small fw-semibold mb-1">
+                {{ 'मूल विज्ञापन से उद्धरण (Evidence):' if is_hindi else 'Quoted Evidence from Notice:' }}
+            </div>
+            <blockquote class="mb-0 text-dark">
+                “{{ item.evidence }}”
+            </blockquote>
+        </div>
+    {% endif %}
+
+    {# Reason / explanation in selected language #}
+    {% if item.reason %}
+        <div class="text-muted small mb-2">
+            {{ item.reason }}
+        </div>
+    {% endif %}
+
+    {# Trust label badge with icon #}
+    {% if item.label %}
+        {% set label_norm = item.label | lower %}
+        {% if 'from_notice' in label_norm or 'from notice' in label_norm %}
+            <span class="trust-badge trust-from-notice">
+                <i class="bi bi-file-earmark-check me-1" aria-hidden="true"></i>
+                {{ 'विज्ञापन से (From notice)' if is_hindi else 'From notice' }}
+            </span>
+        {% elif 'inferred' in label_norm %}
+            <span class="trust-badge trust-inferred">
+                <i class="bi bi-info-circle me-1" aria-hidden="true"></i>
+                {{ 'अनुमानित — पुष्टि करें (Inferred)' if is_hindi else 'Inferred — Check this' }}
+            </span>
+        {% else %}
+            <span class="trust-badge trust-unverified">
+                <i class="bi bi-question-circle me-1" aria-hidden="true"></i>
+                {{ 'सत्यापित नहीं (Unverified)' if is_hindi else 'Unverified' }}
+            </span>
+        {% endif %}
+    {% endif %}
+</div>
+{% endmacro %}

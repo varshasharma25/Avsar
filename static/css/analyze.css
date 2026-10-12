@@ -1,0 +1,104 @@
+/*
+ * Avsar — Analyze Page Stylesheet (Lime & Sage Design)
+ */
+
+.analyze-page-wrapper {
+  background-color: var(--avsar-bg);
+}
+
+.notice-textarea {
+  min-height: 220px;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.55;
+  word-break: break-word;
+  border-radius: var(--avsar-radius-md);
+  border: 1px solid var(--avsar-border);
+  background-color: #ffffff;
+}
+
+.notice-textarea:focus {
+  border-color: var(--avsar-border-focus);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
+  outline: none;
+}
+
+.char-counter {
+  font-size: 0.8rem;
+  color: var(--avsar-text-muted);
+  font-weight: 600;
+}
+
+.char-counter.limit-reached {
+  color: var(--avsar-danger);
+  font-weight: 700;
+}
+
+/* Language selector button group */
+.lang-btn-group .btn {
+  flex: 1 1 50%;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-color: var(--avsar-border);
+  color: var(--avsar-charcoal);
+  transition: all 0.15s ease;
+}
+
+.lang-btn-group .btn-check:checked + .btn-outline-primary {
+  background-color: var(--avsar-charcoal) !important;
+  border-color: var(--avsar-charcoal) !important;
+  color: #ffffff !important;
+}
+
+.lang-btn-group .btn-outline-primary:hover:not(:checked) {
+  background-color: var(--avsar-sage-tint) !important;
+  border-color: var(--avsar-sage-border) !important;
+  color: var(--avsar-charcoal) !important;
+}
+
+.accordion-button:not(.collapsed) {
+  color: var(--avsar-charcoal);
+  background-color: var(--avsar-sage-tint);
+  box-shadow: none;
+}
+
+.accordion-button:focus {
+  border-color: var(--avsar-border-focus);
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.15);
+}
+
+/* Device Documents Local Storage Styles */
+.device-doc-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-radius: var(--avsar-radius-md);
+  border: 1px solid var(--avsar-border);
+  background-color: #ffffff;
+  transition: all 0.15s ease;
+}
+
+.device-doc-item:hover {
+  background-color: var(--avsar-surface-subtle);
+  border-color: #cbd5e1;
+}
+
+.device-doc-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--avsar-radius-sm);
+  background-color: var(--avsar-sage-tint);
+  border: 1px solid var(--avsar-sage-border);
+  color: var(--avsar-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+

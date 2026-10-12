@@ -1,0 +1,305 @@
+{% extends 'base.html' %}
+
+{% block title %}Analyze Opportunity — Avsar (अवसर){% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/analyze.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="analyze-page-wrapper py-4 py-md-5">
+    <div class="container">
+
+        <!-- Page Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+            <div>
+                <span class="badge bg-sage-tint text-success border border-success-subtle small mb-1 fw-semibold">
+                    <i class="bi bi-file-earmark-text me-1" aria-hidden="true"></i> Notice Analyzer
+                </span>
+                <h1 class="h3 fw-bold text-charcoal mb-0">Decode Opportunity Notice</h1>
+                <p class="text-muted small mb-0">
+                    Paste the circular text below. Avsar will analyze eligibility, benefits, and required steps.
+                </p>
+            </div>
+            <div class="d-flex gap-2">
+                <button type="button" id="btn-load-sample" class="btn btn-sm btn-avsar-outline">
+                    <i class="bi bi-lightning-charge text-success me-1" aria-hidden="true"></i> Load Sample Notice
+                </button>
+                <a href="{{ url_for('home_dashboard') }}" class="btn btn-sm btn-avsar-outline">
+                    <i class="bi bi-arrow-left me-1" aria-hidden="true"></i> Dashboard
+                </a>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-9">
+
+                <!-- Loading Overlay / State -->
+                <div id="state-loading" class="avsar-card p-5 text-center mb-4 d-none" aria-live="polite" aria-atomic="true">
+                    <div class="spinner-border text-success mb-3" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <h2 class="h4 fw-bold text-charcoal mb-2">Analyzing Opportunity with Gemini...</h2>
+                    <p class="text-muted small max-w-600 mx-auto mb-0">
+                        Extracting requirements, matching eligibility with verbatim source quotes, and generating your checklist. This typically takes 5–10 seconds.
+                    </p>
+                </div>
+
+                <!-- API Error Alert -->
+                <div id="state-error" class="alert alert-danger d-none mb-4" role="alert" aria-live="assertive">
+                    <div class="d-flex align-items-start gap-2">
+                        <i class="bi bi-exclamation-triangle-fill fs-5 mt-1 text-danger" aria-hidden="true"></i>
+                        <div class="flex-grow-1">
+                            <h3 class="h6 fw-bold mb-1">Analysis Could Not Complete</h3>
+                            <p id="error-message-text" class="small mb-2"></p>
+                            <button type="button" id="btn-retry" class="btn btn-sm btn-outline-danger">
+                                <i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i> Try Again
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Analysis Form Card -->
+                <div class="avsar-card shadow-sm" id="form-card">
+                    <div class="avsar-card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+                        <h2 class="avsar-card-title">
+                            <i class="bi bi-file-earmark-plus text-success" aria-hidden="true"></i>
+                            Paste Notice Details
+                        </h2>
+                        <div class="d-flex align-items-center gap-2">
+                            <!-- Direct Notice File Upload from Device -->
+                            <input type="file" id="notice-file-input" accept=".txt,.pdf,.md,.csv,.rtf" class="d-none">
+                            <button type="button" id="btn-upload-notice" class="btn btn-sm btn-avsar-outline" title="Select a circular file from your device">
+                                <i class="bi bi-file-earmark-arrow-up text-success me-1" aria-hidden="true"></i> Upload Notice (.pdf, .txt)
+                            </button>
+                            <span class="text-muted small">Max 20,000 chars</span>
+                        </div>
+                    </div>
+
+                    <div class="avsar-card-body">
+                        <form id="opportunity-form" method="POST" action="{{ url_for('analyze_endpoint') }}" novalidate>
+
+                            <!-- Notice Textarea -->
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <label for="notice-text" class="form-label mb-0">
+                                        Opportunity Notice Text <span class="text-danger">*</span>
+                                    </label>
+                                    <span id="char-counter" class="char-counter" aria-live="polite">
+                                        0 / 20,000 chars
+                                    </span>
+                                </div>
+                                <textarea
+                                    id="notice-text"
+                                    name="notice_text"
+                                    class="form-control notice-textarea"
+                                    rows="9"
+                                    placeholder="Paste official notification text, circular excerpts, or guidelines here, or click 'Upload Notice' above to load a file directly from your device..."
+                                    maxlength="20000"
+                                    required
+                                    aria-describedby="notice-help"
+                                ></textarea>
+                                <div id="notice-help" class="form-text text-muted small">
+                                    Include eligibility criteria, deadlines, and benefits if available in the text.
+                                </div>
+
+                                <!-- File Upload Feedback Banner -->
+                                <div id="notice-file-status" class="alert alert-success d-none py-2 px-3 small mt-2 mb-0 d-flex justify-content-between align-items-center" role="status">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-check-circle-fill text-success" aria-hidden="true"></i>
+                                        <span id="notice-file-status-text">Notice loaded from device file.</span>
+                                    </div>
+                                    <span class="badge bg-white text-muted border small">Processed in-memory • 100% private</span>
+                                </div>
+
+                                <div id="notice-error" class="invalid-feedback d-none" role="alert"></div>
+                            </div>
+
+                            <!-- Row: Category & Output Language -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-sm-6">
+                                    <label for="notice-category" class="form-label">
+                                        Category <span class="text-danger">*</span>
+                                    </label>
+                                    <select id="notice-category" name="category" class="form-select" required>
+                                        <option value="" disabled {% if not selected_category %}selected{% endif %}>Select Category</option>
+                                        <option value="scholarship" {% if selected_category == 'scholarship' %}selected{% endif %}>Scholarship (छात्रवृत्ति)</option>
+                                        <option value="government_scheme" {% if selected_category == 'government_scheme' %}selected{% endif %}>Government Scheme (सरकारी योजना)</option>
+                                        <option value="job" {% if selected_category == 'job' %}selected{% endif %}>Job Opening (नौकरी)</option>
+                                        <option value="internship" {% if selected_category == 'internship' %}selected{% endif %}>Internship (इंटर्नशिप)</option>
+                                        <option value="training" {% if selected_category == 'training' %}selected{% endif %}>Training / Skill Program (प्रशिक्षण)</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label class="form-label d-block">Explanation Language</label>
+                                    <div class="btn-group w-100 lang-btn-group" role="group" aria-label="Output Language">
+                                        <input type="radio" class="btn-check" name="language" id="lang-en" value="en" {% if session.get('language', 'en') == 'en' %}checked{% endif %}>
+                                        <label class="btn btn-outline-primary" for="lang-en">English</label>
+
+                                        <input type="radio" class="btn-check" name="language" id="lang-hi" value="hi" {% if session.get('language') == 'hi' %}checked{% endif %}>
+                                        <label class="btn btn-outline-primary" for="lang-hi">हिंदी</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Documents Section -->
+                            <div class="mb-4">
+                                <div class="p-3 p-md-4 rounded-3 border bg-white shadow-sm" id="device-docs-card">
+                                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                                        <h3 class="h6 fw-bold text-charcoal mb-0">
+                                            <i class="bi bi-folder-check text-success me-1" aria-hidden="true"></i>
+                                            Documents
+                                        </h3>
+                                        <div>
+                                            <input type="file" id="device-doc-input" class="d-none" accept=".pdf,.txt,.doc,.docx,.png,.jpg,.jpeg">
+                                            <button type="button" id="btn-add-device-doc" class="btn btn-sm btn-avsar-primary">
+                                                <i class="bi bi-plus-circle me-1" aria-hidden="true"></i> Add Documents
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Add Document Configuration Drawer -->
+                                    <div id="add-doc-drawer" class="d-none p-3 rounded-3 bg-light border mb-3">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <span class="fw-bold small text-charcoal">Save Document</span>
+                                            <button type="button" id="btn-cancel-doc" class="btn-close btn-sm" aria-label="Cancel"></button>
+                                        </div>
+                                        <div class="row g-2 align-items-end">
+                                            <div class="col-md-5">
+                                                <label class="form-label small text-muted mb-1">Selected File</label>
+                                                <div id="doc-file-name" class="form-control form-control-sm text-truncate bg-white"></div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="doc-type-select" class="form-label small text-muted mb-1">Category</label>
+                                                <select id="doc-type-select" class="form-select form-select-sm">
+                                                    <option value="Marksheet / Educational Certificate">Marksheet / Education Proof</option>
+                                                    <option value="Income Certificate">Income Certificate</option>
+                                                    <option value="Caste / Category Certificate">Caste / Category Certificate</option>
+                                                    <option value="Domicile / Residence Certificate">Domicile / Residence Certificate</option>
+                                                    <option value="Identity Proof (Aadhaar / Voter ID)">Identity Proof (Aadhaar / ID)</option>
+                                                    <option value="Resume / Curriculum Vitae">Resume / CV</option>
+                                                    <option value="Other Official Certificate">Other Official Certificate</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <button type="button" id="btn-save-doc" class="btn btn-sm btn-avsar-primary w-100">
+                                                    <i class="bi bi-check-lg me-1" aria-hidden="true"></i> Save Document
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Document List / Empty State -->
+                                    <div id="device-docs-container">
+                                        <div id="device-docs-empty" class="text-center py-3 text-muted">
+                                            <i class="bi bi-file-earmark-text fs-2 d-block text-muted opacity-50 mb-1" aria-hidden="true"></i>
+                                            <span class="small">No documents added yet. Click <strong>"Add Documents"</strong> to attach your files.</span>
+                                        </div>
+                                        <div id="device-docs-list" class="d-flex flex-column gap-2 d-none"></div>
+                                    </div>
+
+                                    <!-- Auto-Sync to Profile Helper -->
+                                    <div id="device-docs-sync-bar" class="d-none mt-3 pt-2 border-top d-flex justify-content-between align-items-center flex-wrap gap-2 small">
+                                        <span class="text-muted">
+                                            <i class="bi bi-info-circle text-success me-1" aria-hidden="true"></i>
+                                            <span id="device-docs-count-text">0 documents added</span>
+                                        </span>
+                                        <button type="button" id="btn-sync-profile" class="btn btn-sm btn-avsar-outline">
+                                            <i class="bi bi-arrow-repeat text-success me-1" aria-hidden="true"></i> Include in Eligibility Check
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Optional Profile Section (Collapsible Accordion) -->
+                            <div class="accordion mb-4" id="profile-accordion">
+                                <div class="accordion-item border rounded-3 bg-surface-subtle">
+                                    <h3 class="accordion-header" id="heading-profile">
+                                        <button
+                                            class="accordion-button collapsed bg-surface-subtle rounded-3 py-2 px-3 fw-semibold small text-charcoal"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#collapse-profile"
+                                            aria-expanded="false"
+                                            aria-controls="collapse-profile"
+                                        >
+                                            <i class="bi bi-person-lines-fill text-success me-2" aria-hidden="true"></i>
+                                            Add Your Profile (Optional — for eligibility comparison)
+                                        </button>
+                                    </h3>
+                                    <div
+                                        id="collapse-profile"
+                                        class="accordion-collapse collapse"
+                                        aria-labelledby="heading-profile"
+                                        data-bs-parent="#profile-accordion"
+                                    >
+                                        <div class="accordion-body pt-2 pb-3 px-3">
+                                            <p class="text-muted small mb-3">
+                                                Provide details to compare against the notice requirements. Everything stays strictly in your browser session.
+                                            </p>
+
+                                            <div class="row g-2 mb-2">
+                                                <div class="col-sm-6">
+                                                    <label for="profile-education" class="form-label small">Highest Education</label>
+                                                    <input type="text" id="profile-education" name="profile_education" class="form-control form-control-sm" placeholder="e.g. 12th Pass, B.Tech CSE">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="profile-course-year" class="form-label small">Current Year / Status</label>
+                                                    <input type="text" id="profile-course-year" name="profile_course_year" class="form-control form-control-sm" placeholder="e.g. 2nd Year, Recent Graduate">
+                                                </div>
+                                            </div>
+
+                                            <div class="row g-2 mb-2">
+                                                <div class="col-sm-4">
+                                                    <label for="profile-age" class="form-label small">Age</label>
+                                                    <input type="number" id="profile-age" name="profile_age" class="form-control form-control-sm" placeholder="e.g. 21" min="14" max="100">
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label for="profile-state" class="form-label small">Domicile / State</label>
+                                                    <input type="text" id="profile-state" name="profile_state" class="form-control form-control-sm" placeholder="e.g. Rajasthan, UP">
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label for="profile-category-income" class="form-label small">Category / Income</label>
+                                                    <input type="text" id="profile-category-income" name="profile_category_income" class="form-control form-control-sm" placeholder="e.g. OBC, < 2.5 LPA">
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-1">
+                                                <label for="profile-skills" class="form-label small">Relevant Skills / Experience</label>
+                                                <input type="text" id="profile-skills" name="profile_skills" class="form-control form-control-sm" placeholder="e.g. Python, Accounting, Fresher">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit / Action Buttons -->
+                            <div class="d-flex flex-column flex-sm-row gap-2 align-items-stretch align-items-sm-center justify-content-between pt-2">
+                                <button type="submit" id="btn-analyze" class="btn btn-avsar-primary flex-grow-1">
+                                    <i class="bi bi-search me-1" aria-hidden="true"></i> Analyze Opportunity
+                                </button>
+                                <button type="button" id="btn-clear" class="btn btn-avsar-outline">
+                                    <i class="bi bi-x-circle me-1" aria-hidden="true"></i> Clear Form
+                                </button>
+                            </div>
+
+                            <!-- Privacy Note -->
+                            <div class="mt-3 text-muted text-center" style="font-size: 0.8rem;">
+                                <i class="bi bi-lock me-1" aria-hidden="true"></i>
+                                <strong>Privacy First:</strong> No database. Notices and profiles are processed per-request and never stored.
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script src="{{ url_for('static', filename='js/analyze.js') }}"></script>
+{% endblock %}
