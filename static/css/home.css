@@ -7,7 +7,7 @@
 }
 
 .dashboard-hero-banner {
-  background: radial-gradient(ellipse 90% 60% at 50% 0%, rgba(134, 239, 172, 0.3) 0%, rgba(255, 255, 255, 0.8) 60%), #ffffff;
+  background-color: var(--avsar-surface);
   border: 1px solid var(--avsar-border);
   border-radius: var(--avsar-radius-lg);
   box-shadow: var(--avsar-shadow-sm);

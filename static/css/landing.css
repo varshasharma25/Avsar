@@ -4,7 +4,7 @@
 
 .landing-hero {
   position: relative;
-  background: radial-gradient(ellipse 90% 55% at 50% -5%, rgba(134, 239, 172, 0.45) 0%, rgba(167, 243, 208, 0.22) 45%, rgba(255, 255, 255, 0) 80%), #ffffff;
+  background-color: #ffffff;
   padding: 4.5rem 0 3.5rem;
   overflow: hidden;
 }
