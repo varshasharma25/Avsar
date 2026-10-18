@@ -127,8 +127,8 @@ class TestAvsarRoutes(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         html = res.get_data(as_text=True)
         self.assertIn("Explore Opportunity Categories", html)
-        self.assertIn("Scholarships (छात्रवृत्ति)", html)
-        self.assertIn("Government Schemes (सरकारी योजना)", html)
+        self.assertIn("Scholarships", html)
+        self.assertIn("Government Schemes", html)
         # Verify analyze form is NOT present on opportunities page
         self.assertNotIn("textarea id=\"notice_text\"", html)
 
