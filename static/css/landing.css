@@ -4,7 +4,8 @@
 
 .landing-hero {
   position: relative;
-  background-color: #ffffff;
+  background-color: var(--avsar-primary-light); /* Solid soft light-green surface */
+  border-bottom: 1px solid var(--avsar-primary-border);
   padding: 4.5rem 0 3.5rem;
   overflow: hidden;
 }

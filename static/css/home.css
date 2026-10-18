@@ -7,8 +7,8 @@
 }
 
 .dashboard-hero-banner {
-  background-color: var(--avsar-surface);
-  border: 1px solid var(--avsar-border);
+  background-color: var(--avsar-primary-light);
+  border: 1px solid var(--avsar-primary-border);
   border-radius: var(--avsar-radius-lg);
   box-shadow: var(--avsar-shadow-sm);
   padding: 3rem 2.5rem;

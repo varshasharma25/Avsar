@@ -53,17 +53,13 @@ Analysis Results — Avsar (अवसर)
         <!-- Top Header & Actions Bar -->
         <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
             <div>
-                <div class="d-flex align-items-center gap-2 mb-1">
-                    <span class="badge bg-sage-tint text-success border border-success-subtle small fw-semibold">
-                        <i class="bi bi-card-checklist me-1" aria-hidden="true"></i>
-                        {{ 'डिकोड किया गया परिणाम' if is_hindi else 'Decoded Analysis Result' }}
-                    </span>
-                    {% if analysis.opportunity_type %}
+                {% if analysis.opportunity_type %}
+                <div class="mb-1">
                     <span class="badge bg-light text-muted border small text-uppercase">
                         {{ analysis.opportunity_type | replace('_', ' ') }}
                     </span>
-                    {% endif %}
                 </div>
+                {% endif %}
                 <h1 class="h3 fw-bold text-charcoal mb-0">
                     {{ analysis.title | default('Opportunity Analysis') }}
                 </h1>

@@ -7,8 +7,8 @@
 }
 
 .about-header-banner {
-  background-color: var(--avsar-surface);
-  border: 1px solid var(--avsar-border);
+  background-color: var(--avsar-primary-light);
+  border: 1px solid var(--avsar-primary-border);
   border-radius: var(--avsar-radius-lg);
   padding: 3rem 2rem;
 }
